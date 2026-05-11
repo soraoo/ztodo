@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="note" class="note">
+    <div class="note-inner">
+      <div class="top-row">
+        <input type="checkbox" id="checkbox" class="checkbox">
+        <div id="text" class="text">&nbsp;</div>
+        <input type="text" id="editor" class="editor" style="display:none">
+      </div>
+      <div class="bottom-row">
+        <button id="btn-new" class="icon-btn" title="New note">+</button>
+        <button id="btn-delete" class="icon-btn" title="Delete">x</button>
+        <span class="color-dots">
+          <span class="dot yellow active" data-color="yellow"></span>
+          <span class="dot pink" data-color="pink"></span>
+          <span class="dot green" data-color="green"></span>
+          <span class="dot blue" data-color="blue"></span>
+          <span class="dot white" data-color="white"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <script src="note.js"></script>
+</body>
+</html>
