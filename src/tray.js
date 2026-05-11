@@ -1,4 +1,4 @@
-const { Tray, Menu, nativeImage, screen } = require('electron');
+const { Tray, Menu, nativeImage } = require('electron');
 const path = require('path');
 
 function createTray(store, windowManager) {
@@ -8,15 +8,6 @@ function createTray(store, windowManager) {
   tray.setToolTip('ZTodo');
 
   const menu = Menu.buildFromTemplate([
-    {
-      label: 'New Note',
-      click: () => {
-        const cursor = screen.getCursorScreenPoint();
-        const todo = store.create('', cursor.x - 120, cursor.y - 25);
-        windowManager.createNoteWindow(todo);
-      }
-    },
-    { type: 'separator' },
     {
       label: 'Show/Hide All',
       click: () => windowManager.toggleAll()
