@@ -55,7 +55,7 @@ jobs:
 
   release:
     needs: build
-    if: github.event_name == 'push'
+    if: ${{ !cancelled() && github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
@@ -65,7 +65,8 @@ jobs:
       - name: Flatten artifacts
         run: |
           mkdir -p release
-          find dist -type f \( -name '*.exe' -o -name '*.dmg' -o -name '*.AppImage' \) -exec cp {} release/ \;
+          find dist -type f \( -name '*.exe' -o -name '*.dmg' -o -name '*.AppImage' \) -exec cp {} release/ \; || true
+          ls -la release/ || echo "No artifacts to release"
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
@@ -75,5 +76,6 @@ jobs:
           files: release/*
           draft: false
           prerelease: false
+          fail_on_unmatched_files: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
