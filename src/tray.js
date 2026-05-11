@@ -1,7 +1,9 @@
 const { Tray, Menu, nativeImage, screen } = require('electron');
+const path = require('path');
 
 function createTray(store, windowManager) {
-  const icon = nativeImage.createFromBuffer(_trayIconPng(), { width: 16, height: 16 });
+  const iconPath = path.join(__dirname, '..', 'assets', 'icon.png');
+  const icon = nativeImage.createFromPath(iconPath);
   const tray = new Tray(icon);
   tray.setToolTip('ZTodo');
 
@@ -28,11 +30,6 @@ function createTray(store, windowManager) {
 
   tray.setContextMenu(menu);
   return tray;
-}
-
-function _trayIconPng() {
-  const b64 = 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAXElEQVQ4y2P4//8/AzmAiYEMwEQuA2TCLgbYAmJb0tAN+xkYGP5DFcAamEUBbBgswCnFxMDA8B+qABaA+BNUAEwPEGG0nKILwM5CoMG0oK8TBRRFwOXCKDoCAPtOJkGaOYSWAAAAAElFTkSuQmCC';
-  return Buffer.from(b64, 'base64');
 }
 
 module.exports = { createTray };
